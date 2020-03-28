@@ -11,15 +11,25 @@ public class Client implements Serializable {
     private long code ;
     private String nom ;
     private  String email ;
-    @OneToMany(mappedBy ="client",fetch = FetchType.LAZY )
+    @OneToMany(mappedBy ="client",fetch = FetchType.EAGER )
     private Collection<Compte> comptes ;
 
     public Client() {
     }
 
-    public Client(String nom, String email) {
+
+    public Client(long code ,String nom, String email) {
+        this.code = code ;
         this.nom = nom;
         this.email = email;
+    }
+
+    public long getCode() {
+        return code;
+    }
+
+    public void setCode(long code) {
+        this.code = code;
     }
 
     public String getNom() {
@@ -44,5 +54,15 @@ public class Client implements Serializable {
 
     public void setComptes(Collection<Compte> comptes) {
         this.comptes = comptes;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "code=" + code +
+                ", nom='" + nom + '\'' +
+                ", email='" + email + '\'' +
+                ", comptes=" + comptes.toString() +
+                '}';
     }
 }
